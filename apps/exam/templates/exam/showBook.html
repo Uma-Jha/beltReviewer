@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login & Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  {% load staticfiles %}
+ <link rel="stylesheet" href="{% static 'exam/style.css' %}">
+</head>
+<body>
+	{% if request.session.logged %}
+	<div class="row">
+		<div class="col-md-8 col-md-offset-1"></div>
+		<div class="col-md-2"><a href="/books" class="top pull-right bold">Home</a></div>
+		<div class="col-md-1"><a href="/logout" class="top pull-left bold">Logout</a></div>
+	</div>
+	<div class="col-md-7">
+	<h3>{{book.title}}</h3>
+	<h4>Author: {{book.author}}</h4>
+	<p>Reviews</p>
+	<h5>Rating: {{book.rating}}</h5>
+	{% for review in reviews%}
+	<h5>{{review.content}}</h5>
+	{% endfor %}
+	</div>
+	<div class="col-md-5">
+		<form action="/addReview" method="POST">
+			{% csrf_token %}
+			<div class="form-group">
+	  			<label for="review">Add a Review:</label>
+	  			<textarea class="form-control" rows="5" name="review"></textarea>
+			</div>
+			Rating:
+			<select name="rating">
+			  <option value="1">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			</select>
+			<input type="hidden" name="book_id" value="{{ book.id }}">
+			<input type="submit" class="btn btn-primary pull-right" value="Submit Review">
+		</form>
+	</div>
+	<div class="col-md-offset-1"></div>
+{% endif %}
+</body>
+</html>

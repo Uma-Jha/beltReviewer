@@ -1,0 +1,16 @@
+.top{
+	margin-top: 15px;
+}
+.bold{
+	font-weight: bold;
+}
+.warning{
+	margin-left: 30px;
+	margin-top: 10px;
+	color: red;
+	font-weight: bold;
+}
+.bg{
+	background-color: #3CB371;
+	height: 700px;
+}
